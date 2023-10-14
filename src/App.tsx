@@ -6,15 +6,25 @@
  */
 
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import HomeScreen from './screens/HomeScreen';
+import MoodScreen from './screens/MoodScreen';
+import TodayIsScreen from './screens/TodayIsScreen';
+import Layout from './components/layout/Layout';
+
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   return (
-    <SafeAreaView className="flex-1 items-center justify-center">
-      <View>
-        <Text className="text-xl">Hello Sir</Text>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Mood" component={MoodScreen} />
+        <Stack.Screen name="TodayIs" component={TodayIsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
