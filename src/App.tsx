@@ -6,12 +6,14 @@
  */
 
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 
 function App(): JSX.Element {
   return (
     <SafeAreaView className="flex-1 items-center justify-center">
-      <Text className="text-xl">Hello</Text>
+      <View>
+        <Text className="text-xl">Hello Sir</Text>
+      </View>
     </SafeAreaView>
   );
 }
