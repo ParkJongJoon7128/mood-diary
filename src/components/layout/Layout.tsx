@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
-import {View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {ImageBackground} from 'react-native';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,9 +7,12 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({children}) => {
   return (
-    <SafeAreaView>
-      <View>{children}</View>
-    </SafeAreaView>
+    <ImageBackground
+      source={require('../../public/background.png')}
+      resizeMode={'repeat'}
+      className="flex-1 overflow-hidden">
+      {children}
+    </ImageBackground>
   );
 };
 

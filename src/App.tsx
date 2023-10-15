@@ -12,9 +12,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import MoodScreen from './screens/MoodScreen';
 import TodayIsScreen from './screens/TodayIsScreen';
-import Layout from './components/layout/Layout';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<ROOT_NAVIGATION>();
 
 function App(): JSX.Element {
   return (
