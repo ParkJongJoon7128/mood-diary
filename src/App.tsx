@@ -18,7 +18,9 @@ const Stack = createNativeStackNavigator<ROOT_NAVIGATION>();
 function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{headerShown: true}}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Mood" component={MoodScreen} />
         <Stack.Screen name="TodayIs" component={TodayIsScreen} />

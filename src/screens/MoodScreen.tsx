@@ -9,14 +9,17 @@ const MoodScreen = () => {
     useNavigation<NativeStackNavigationProp<ROOT_NAVIGATION>>();
 
   return (
+    // Logic
+
+    // View
     <Layout>
       <View className="flex-1 items-center justify-center">
-        <Text>MoodScreen</Text>
+        <Text className="text-lg">MoodScreen</Text>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('Mood');
           }}>
-          <Text>Test</Text>
+          <Text className="text-lg">Test</Text>
         </TouchableOpacity>
       </View>
     </Layout>
