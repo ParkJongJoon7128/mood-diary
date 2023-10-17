@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Text, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 
 interface TitleProps {
   mainTitle: string;
@@ -8,9 +8,18 @@ interface TitleProps {
 
 const Title: FC<TitleProps> = ({mainTitle, subTitle}) => {
   return (
-    <View>
-      <Text className="text-sm">{subTitle}</Text>
-      <Text className="text-base">{mainTitle}</Text>
+    <View className="flex-1 items-center justify-center">
+      {subTitle && (
+        <Text className="text-xl pb-2 text-gray-700">{subTitle}</Text>
+      )}
+      <View className="items-center justify-center">
+        <Image
+          className="absolute object-contain"
+          source={require('../public/images/TitleMarker.png')}
+          alt="마커"
+        />
+        <Text className="relative text-base text-gray-700">{mainTitle}</Text>
+      </View>
     </View>
   );
 };

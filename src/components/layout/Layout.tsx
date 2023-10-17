@@ -8,9 +8,9 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({children}) => {
   return (
     <ImageBackground
-      source={require('../../public/background.png')}
+      source={require('../../public/images/BackgroundCell.png')}
       resizeMode={'repeat'}
-      className="flex-1 overflow-hidden">
+      className="flex-1 overflow-hidde">
       {children}
     </ImageBackground>
   );
