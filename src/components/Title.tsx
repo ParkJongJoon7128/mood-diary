@@ -8,7 +8,7 @@ interface TitleProps {
 
 const Title: FC<TitleProps> = ({mainTitle, subTitle}) => {
   return (
-    <View className="flex-1 items-center justify-center">
+    <View className="items-center justify-center">
       {subTitle && (
         <Text className="text-xl pb-2 text-gray-700">{subTitle}</Text>
       )}

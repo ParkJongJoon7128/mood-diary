@@ -10,7 +10,7 @@ const Layout: FC<LayoutProps> = ({children}) => {
     <ImageBackground
       source={require('../../public/images/BackgroundCell.png')}
       resizeMode={'repeat'}
-      className="flex-1 overflow-hidde">
+      className="flex-1 overflow-hidden">
       {children}
     </ImageBackground>
   );

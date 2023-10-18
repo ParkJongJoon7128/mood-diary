@@ -21,7 +21,7 @@ function App(): JSX.Element {
     <Layout>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="TodayIs"
           screenOptions={{headerShown: true}}>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Mood" component={MoodScreen} />
