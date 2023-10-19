@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {moods} from '../data/common';
 
 const EmotionSelect = () => {
   // Logic
+  const [selectedMood, setSelectedMood] = useState(null);
+
   const getEmotionImage = (name: string) => {
     switch (name) {
       case 'annoying':
@@ -31,9 +33,15 @@ const EmotionSelect = () => {
       <Text className="text-3xl mb-2">오늘 하루는 어땠니?</Text>
       <View className="flex-row flex-wrap items-center justify-center">
         {moods.map(mood => (
-          <TouchableOpacity className="p-5">
+          <TouchableOpacity
+            className="p-5"
+            key={mood.id}
+            onPress={() => setSelectedMood(mood.id)}>
             <Image
               resizeMode="contain"
+              className={`${
+                selectedMood === mood.id ? 'rounded-full' : 'opacity-20'
+              }`}
               source={getEmotionImage(mood.name)}
               alt={mood.name}
             />
