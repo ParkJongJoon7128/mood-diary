@@ -12,8 +12,8 @@ const Emotion: FC<EmotionProps> = ({data}) => {
     switch (name) {
       case 'annoying':
         return require('../public/images/annoying.png');
-      case 'bother':
-        return require('../public/images/bother.png');
+      case 'tired':
+        return require('../public/images/tired.png');
       case 'depressed':
         return require('../public/images/depressed.png');
       case 'happy':

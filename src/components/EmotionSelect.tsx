@@ -1,17 +1,27 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {moods} from '../data/common';
+import {MoodType} from '../lib/type';
 
-const EmotionSelect = () => {
+interface EmotionSelectProps {
+  title: string;
+  moods: MoodType[];
+}
+
+const EmotionSelect: FC<EmotionSelectProps> = ({title, moods}) => {
   // Logic
   const [selectedMood, setSelectedMood] = useState(null);
+
+  const onSelectedMood = mood => {
+    setSelectedMood(mood.id);
+    console.log(mood.description);
+  };
 
   const getEmotionImage = (name: string) => {
     switch (name) {
       case 'annoying':
         return require('../public/images/annoying.png');
-      case 'bother':
-        return require('../public/images/bother.png');
+      case 'tired':
+        return require('../public/images/tired.png');
       case 'depressed':
         return require('../public/images/depressed.png');
       case 'happy':
@@ -30,13 +40,13 @@ const EmotionSelect = () => {
   // View
   return (
     <View className="flex-1 items-center justify-center">
-      <Text className="text-3xl mb-2">오늘 하루는 어땠니?</Text>
+      <Text className="text-3xl mb-2">{title}</Text>
       <View className="flex-row flex-wrap items-center justify-center">
         {moods.map(mood => (
           <TouchableOpacity
             className="p-5"
             key={mood.id}
-            onPress={() => setSelectedMood(mood.id)}>
+            onPress={() => onSelectedMood(mood)}>
             <Image
               resizeMode="contain"
               className={`${

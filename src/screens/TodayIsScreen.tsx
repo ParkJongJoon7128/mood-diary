@@ -3,6 +3,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 import {View} from 'react-native';
 import EmotionSelect from '../components/EmotionSelect';
+import { moods } from '../data/common';
 
 const TodayIsScreen = () => {
   // Logic
@@ -12,7 +13,7 @@ const TodayIsScreen = () => {
   return (
     // View
     <View className="flex-1 items-center justify-center">
-      <EmotionSelect />
+      <EmotionSelect title="오늘 하루는 어땠니?" moods={moods} />
     </View>
   );
 };

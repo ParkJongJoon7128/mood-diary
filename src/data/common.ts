@@ -33,8 +33,8 @@ export const moods: MoodType[] = [
   },
   {
     id: 7,
-    name: 'bother',
-    description: '귀찮음',
+    name: 'tired',
+    description: '피곤함',
   },
   {
     id: 8,
