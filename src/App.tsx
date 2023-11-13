@@ -7,14 +7,17 @@
 
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from '@react-navigation/stack';
 
 import HomeScreen from './screens/HomeScreen';
 import MoodScreen from './screens/MoodScreen';
 import TodayIsScreen from './screens/TodayIsScreen';
 import Layout from './components/layout/Layout';
 
-const Stack = createNativeStackNavigator<ROOT_NAVIGATION>();
+const Stack = createStackNavigator<ROOT_NAVIGATION>();
 
 function App(): JSX.Element {
   return (
@@ -22,7 +25,10 @@ function App(): JSX.Element {
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Home"
-          screenOptions={{headerShown: true}}>
+          screenOptions={{
+            headerShown: true,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          }}>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Mood" component={MoodScreen} />
           <Stack.Screen name="TodayIs" component={TodayIsScreen} />

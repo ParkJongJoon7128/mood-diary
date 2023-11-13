@@ -2,8 +2,9 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 import {View} from 'react-native';
+import CalendarSelect from '../components/CalendarSelect';
 import EmotionSelect from '../components/EmotionSelect';
-import { moods } from '../data/common';
+import {moods} from '../data/common';
 
 const TodayIsScreen = () => {
   // Logic

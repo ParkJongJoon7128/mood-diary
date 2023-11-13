@@ -1,6 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {FC, useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {MoodType} from '../lib/type';
+import CalendarSelect from './CalendarSelect';
+import Modal from 'react-native-modal';
 
 interface EmotionSelectProps {
   title: string;
@@ -10,9 +13,11 @@ interface EmotionSelectProps {
 const EmotionSelect: FC<EmotionSelectProps> = ({title, moods}) => {
   // Logic
   const [selectedMood, setSelectedMood] = useState(null);
+  const [visibleCalendar, setVisibleCalendar] = useState(false);
 
   const onSelectedMood = mood => {
     setSelectedMood(mood.id);
+    setVisibleCalendar(true);
     console.log(mood.description);
   };
 
@@ -50,13 +55,24 @@ const EmotionSelect: FC<EmotionSelectProps> = ({title, moods}) => {
             <Image
               resizeMode="contain"
               className={`${
-                selectedMood === mood.id ? 'rounded-full' : 'opacity-20'
+                selectedMood === mood.id ? 'opacity-100' : 'opacity-20'
               }`}
               source={getEmotionImage(mood.name)}
               alt={mood.name}
             />
           </TouchableOpacity>
         ))}
+      </View>
+
+      <View>
+        <Modal
+          isVisible={visibleCalendar}
+          onBackButtonPress={() => setVisibleCalendar(false)}
+          onBackdropPress={() => setVisibleCalendar(false)}>
+          <View className="flex-1 justify-center items-cente">
+            <CalendarSelect onClose={() => setVisibleCalendar(false)} />
+          </View>
+        </Modal>
       </View>
     </View>
   );
