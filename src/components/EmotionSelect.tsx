@@ -8,17 +8,33 @@ import Modal from 'react-native-modal';
 interface EmotionSelectProps {
   title: string;
   moods: MoodType[];
+  emotionChange: (data: MoodType) => void;
 }
 
 const EmotionSelect: FC<EmotionSelectProps> = ({title, moods}) => {
   // Logic
+  const [value, setValue] = useState('');
   const [selectedMood, setSelectedMood] = useState(null);
   const [visibleCalendar, setVisibleCalendar] = useState(false);
 
   const onSelectedMood = mood => {
     setSelectedMood(mood.id);
     setVisibleCalendar(true);
-    console.log(mood.description);
+    console.log('🚀 : value ==> ', mood.description);
+  };
+
+  const handleDateChange = (date: String) => {
+    console.log('🚀 : data ==> ', date);
+  };
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    mood: MoodType,
+  ) => {
+    const {value} = event.target;
+    console.log('🚀 : value ==> ', value);
+    setValue(value);
+    onSelectedMood(mood);
   };
 
   const getEmotionImage = (name: string) => {
@@ -51,7 +67,10 @@ const EmotionSelect: FC<EmotionSelectProps> = ({title, moods}) => {
           <TouchableOpacity
             className="p-5"
             key={mood.id}
-            onPress={() => onSelectedMood(mood)}>
+            onPress={
+              (event, mood) => handleChange(event, mood)
+              // onSelectedMood(mood)
+            }>
             <Image
               resizeMode="contain"
               className={`${
@@ -70,7 +89,10 @@ const EmotionSelect: FC<EmotionSelectProps> = ({title, moods}) => {
           onBackButtonPress={() => setVisibleCalendar(false)}
           onBackdropPress={() => setVisibleCalendar(false)}>
           <View className="flex-1 justify-center items-cente">
-            <CalendarSelect onClose={() => setVisibleCalendar(false)} />
+            <CalendarSelect
+              onClose={() => setVisibleCalendar(false)}
+              dateChange={handleDateChange}
+            />
           </View>
         </Modal>
       </View>
