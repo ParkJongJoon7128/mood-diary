@@ -11,30 +11,27 @@ interface EmotionSelectProps {
   emotionChange: (data: MoodType) => void;
 }
 
-const EmotionSelect: FC<EmotionSelectProps> = ({title, moods}) => {
+const EmotionSelect: FC<EmotionSelectProps> = ({
+  title,
+  moods,
+  emotionChange,
+}) => {
   // Logic
-  const [value, setValue] = useState('');
   const [selectedMood, setSelectedMood] = useState(null);
   const [visibleCalendar, setVisibleCalendar] = useState(false);
 
   const onSelectedMood = mood => {
     setSelectedMood(mood.id);
     setVisibleCalendar(true);
-    console.log('🚀 : value ==> ', mood.description);
+  };
+
+  const handleChange = (mood: MoodType) => {
+    onSelectedMood(mood);
+    emotionChange(mood);
   };
 
   const handleDateChange = (date: String) => {
-    console.log('🚀 : data ==> ', date);
-  };
-
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    mood: MoodType,
-  ) => {
-    const {value} = event.target;
-    console.log('🚀 : value ==> ', value);
-    setValue(value);
-    onSelectedMood(mood);
+    console.log('🚀 : 캘린더 날짜 ==> ', date);
   };
 
   const getEmotionImage = (name: string) => {
@@ -67,10 +64,9 @@ const EmotionSelect: FC<EmotionSelectProps> = ({title, moods}) => {
           <TouchableOpacity
             className="p-5"
             key={mood.id}
-            onPress={
-              (event, mood) => handleChange(event, mood)
-              // onSelectedMood(mood)
-            }>
+            onPress={() => {
+              handleChange(mood);
+            }}>
             <Image
               resizeMode="contain"
               className={`${

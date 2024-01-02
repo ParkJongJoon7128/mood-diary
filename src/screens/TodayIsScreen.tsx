@@ -9,8 +9,8 @@ import {MoodType} from '../lib/type';
 
 const TodayIsScreen = () => {
   // Logic
-  const handleDateChange = (date: String) => {
-    console.log('🚀 : data ==> ', date);
+  const handleEmotionChange = (data: MoodType) => {
+    console.log('🚀 : 감정 ==> ', data.description);
   };
 
   const navigation =
@@ -22,7 +22,7 @@ const TodayIsScreen = () => {
       <EmotionSelect
         title="오늘 하루는 어땠니?"
         moods={moods}
-        emotionChange={handleDateChange}
+        emotionChange={handleEmotionChange}
       />
     </View>
   );
