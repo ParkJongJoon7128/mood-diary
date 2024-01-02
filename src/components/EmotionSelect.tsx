@@ -1,9 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {MoodType} from '../lib/type';
+import {DiaryType, MoodType} from '../lib/type';
 import CalendarSelect from './CalendarSelect';
 import Modal from 'react-native-modal';
+import {initialDiary} from '../data/initialState';
 
 interface EmotionSelectProps {
   title: string;
@@ -19,6 +20,7 @@ const EmotionSelect: FC<EmotionSelectProps> = ({
   // Logic
   const [selectedMood, setSelectedMood] = useState(null);
   const [visibleCalendar, setVisibleCalendar] = useState(false);
+  const [diary, setDiary] = useState<DiaryType>(initialDiary);
 
   const onSelectedMood = mood => {
     setSelectedMood(mood.id);
@@ -32,7 +34,13 @@ const EmotionSelect: FC<EmotionSelectProps> = ({
 
   const handleDateChange = (date: String) => {
     console.log('🚀 : 캘린더 날짜 ==> ', date);
+    const result = {...diary, date};
+    setDiary(result);
   };
+
+  useEffect(() => {
+    console.log('🚀 : 다이어리 ==> ', diary);
+  }, []);
 
   const getEmotionImage = (name: string) => {
     switch (name) {

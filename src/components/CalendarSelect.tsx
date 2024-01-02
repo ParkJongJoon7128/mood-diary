@@ -2,6 +2,7 @@ import React, {FC, useState} from 'react';
 import {Calendar} from 'react-native-calendars';
 import {View} from 'react-native';
 import {daysOfWeek} from '../data/common';
+import {DiaryType} from '../lib/type';
 
 interface CalendarSelectProps {
   onClose: () => void;
