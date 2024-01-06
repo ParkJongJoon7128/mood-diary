@@ -11,6 +11,7 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
+import {RecoilRoot} from 'recoil';
 
 import HomeScreen from './screens/HomeScreen';
 import MoodScreen from './screens/MoodScreen';
@@ -21,20 +22,22 @@ const Stack = createStackNavigator<ROOT_NAVIGATION>();
 
 function App(): JSX.Element {
   return (
-    <Layout>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerShown: true,
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Mood" component={MoodScreen} />
-          <Stack.Screen name="TodayIs" component={TodayIsScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Layout>
+    <RecoilRoot>
+      <Layout>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerShown: true,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Mood" component={MoodScreen} />
+            <Stack.Screen name="TodayIs" component={TodayIsScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Layout>
+    </RecoilRoot>
   );
 }
 

@@ -3,6 +3,8 @@ import {Calendar} from 'react-native-calendars';
 import {View} from 'react-native';
 import {daysOfWeek} from '../data/common';
 import {DiaryType} from '../lib/type';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 interface CalendarSelectProps {
   onClose: () => void;
@@ -11,6 +13,9 @@ interface CalendarSelectProps {
 
 const CalendarSelect: FC<CalendarSelectProps> = ({onClose, dateChange}) => {
   // Logic
+  const navigation =
+    useNavigation<NativeStackNavigationProp<ROOT_NAVIGATION>>();
+
   const [selected, setSelected] = useState('');
 
   const getDaysOfWeek = (year: number, month: number, day: number) => {
@@ -30,6 +35,7 @@ const CalendarSelect: FC<CalendarSelectProps> = ({onClose, dateChange}) => {
     )}`;
     dateChange(resultDate);
     onClose();
+    navigation.navigate('Mood');
   };
 
   // View

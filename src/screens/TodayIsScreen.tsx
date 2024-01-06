@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import EmotionSelect from '../components/EmotionSelect';
 import {moods} from '../data/common';
-import {initialDiary} from '../data/initialState';
-import {DiaryType, MoodType} from '../lib/type';
+import {MoodType} from '../lib/type';
+import {useRecoilState} from 'recoil';
+import {diaryState} from '../data/dateState';
 
 const TodayIsScreen = () => {
   // Logic
-  const [diary, setDiary] = useState<DiaryType>(initialDiary);
+  const [diary, setDiary] = useRecoilState(diaryState);
 
   const handleEmotionChange = (mood: MoodType) => {
     console.log('🚀 : data ==> ', mood);

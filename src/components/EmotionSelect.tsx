@@ -23,7 +23,7 @@ const EmotionSelect: FC<EmotionSelectProps> = ({
   const [selectedMood, setSelectedMood] = useState(null);
   const [visibleCalendar, setVisibleCalendar] = useState(false);
 
-  const onSelectedMood = (mood) => {
+  const onSelectedMood = mood => {
     setSelectedMood(mood.id);
     setVisibleCalendar(true);
   };
@@ -39,9 +39,9 @@ const EmotionSelect: FC<EmotionSelectProps> = ({
     setDiary(result);
   };
 
-  useEffect(() => {
-    console.log('🚀 : diary ==> ', diary);
-  }, [diary]);
+  // useEffect(() => {
+  //   console.log('🚀 : diary ==> ', diary);
+  // }, [diary]);
 
   const getEmotionImage = (name: string) => {
     switch (name) {
