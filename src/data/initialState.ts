@@ -20,8 +20,8 @@ export const initialDiary: DiaryType = {
   date: today(),
   diary: '',
   mood: {
-    // id: number,
-    // name: string,
-    // description: string,
+    id: 1,
+    name: 'depressed',
+    description: '우울함',
   },
 };

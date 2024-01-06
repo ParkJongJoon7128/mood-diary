@@ -1,28 +1,29 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {FC, useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {DiaryType, MoodType} from '../lib/type';
 import CalendarSelect from './CalendarSelect';
 import Modal from 'react-native-modal';
-import {initialDiary} from '../data/initialState';
 
 interface EmotionSelectProps {
   title: string;
   moods: MoodType[];
   emotionChange: (data: MoodType) => void;
+  diary: DiaryType;
+  setDiary: React.Dispatch<React.SetStateAction<DiaryType>>;
 }
 
 const EmotionSelect: FC<EmotionSelectProps> = ({
   title,
   moods,
   emotionChange,
+  diary,
+  setDiary,
 }) => {
   // Logic
   const [selectedMood, setSelectedMood] = useState(null);
   const [visibleCalendar, setVisibleCalendar] = useState(false);
-  const [diary, setDiary] = useState<DiaryType>(initialDiary);
 
-  const onSelectedMood = mood => {
+  const onSelectedMood = (mood) => {
     setSelectedMood(mood.id);
     setVisibleCalendar(true);
   };
@@ -32,15 +33,15 @@ const EmotionSelect: FC<EmotionSelectProps> = ({
     emotionChange(mood);
   };
 
-  const handleDateChange = (date: String) => {
-    console.log('🚀 : 캘린더 날짜 ==> ', date);
+  const handleDateChange = (date: string) => {
+    console.log('🚀 : date ==> ', date);
     const result = {...diary, date};
     setDiary(result);
   };
 
   useEffect(() => {
-    console.log('🚀 : 다이어리 ==> ', diary);
-  }, []);
+    console.log('🚀 : diary ==> ', diary);
+  }, [diary]);
 
   const getEmotionImage = (name: string) => {
     switch (name) {

@@ -1,5 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import EmotionSelect from '../components/EmotionSelect';
@@ -12,8 +10,9 @@ const TodayIsScreen = () => {
   const [diary, setDiary] = useState<DiaryType>(initialDiary);
 
   const handleEmotionChange = (mood: MoodType) => {
-    console.log('🚀 : 감정 ==> ', mood.description);
-    setDiary(prev => ({...prev, mood}));
+    console.log('🚀 : data ==> ', mood);
+    const result = {...diary, mood};
+    setDiary(result);
   };
 
   return (
@@ -23,6 +22,8 @@ const TodayIsScreen = () => {
         title="오늘 하루는 어땠니?"
         moods={moods}
         emotionChange={handleEmotionChange}
+        diary={diary}
+        setDiary={setDiary}
       />
     </View>
   );
