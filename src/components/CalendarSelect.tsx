@@ -2,7 +2,6 @@ import React, {FC, useState} from 'react';
 import {Calendar} from 'react-native-calendars';
 import {View} from 'react-native';
 import {daysOfWeek} from '../data/common';
-import {DiaryType} from '../lib/type';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
