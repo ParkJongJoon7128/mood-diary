@@ -1,27 +1,30 @@
-import React, {FC, useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {DiaryType, MoodType} from '../lib/type';
-import CalendarSelect from './CalendarSelect';
+import React, { FC, useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modal';
+import { useRecoilState } from 'recoil';
+import { diaryState } from '../data/dataState';
+import { MoodType } from '../lib/type';
+import CalendarSelect from './CalendarSelect';
 
 interface EmotionSelectProps {
   title: string;
   moods: MoodType[];
   emotionChange: (data: MoodType) => void;
-  diary: DiaryType;
-  setDiary: React.Dispatch<React.SetStateAction<DiaryType>>;
+  // diary: DiaryType;
+  // setDiary: React.Dispatch<React.SetStateAction<DiaryType>>;
 }
 
 const EmotionSelect: FC<EmotionSelectProps> = ({
   title,
   moods,
   emotionChange,
-  diary,
-  setDiary,
+  // diary,
+  // setDiary,
 }) => {
   // Logic
   const [selectedMood, setSelectedMood] = useState(null);
   const [visibleCalendar, setVisibleCalendar] = useState(false);
+  const [diary, setDiary] = useRecoilState(diaryState);
 
   const onSelectedMood = mood => {
     setSelectedMood(mood.id);

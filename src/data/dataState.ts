@@ -6,3 +6,8 @@ export const diaryState = atom<DiaryType>({
   key: 'diaryState',
   default: initialDiary,
 });
+
+export const diaryListState = atom<DiaryType[]>({
+  key: 'diaryListState',
+  default: [],
+});

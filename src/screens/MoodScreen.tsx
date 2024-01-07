@@ -1,17 +1,17 @@
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import React, {useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { useState } from 'react';
 import {
   GestureResponderEvent,
-  View,
-  TouchableOpacity,
   Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import {useRecoilState} from 'recoil';
-import {diaryState} from '../data/dateState';
-import Emotion from '../components/Emotion';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import Date from '../components/Date';
 import DiaryInput from '../components/DiaryInput';
+import Emotion from '../components/Emotion';
+import { diaryListState, diaryState } from '../data/dataState';
 
 const MoodScreen = () => {
   // Logic
@@ -23,12 +23,20 @@ const MoodScreen = () => {
   const [isReset, setIsReset] = useState(false);
 
   const {date, mood} = diary;
+  const setDiaryList = useSetRecoilState(diaryListState);
 
   const handleSubmit = (event: GestureResponderEvent) => {
     event.preventDefault();
-    setDiary(prev => ({...prev, diary: diaryValue}));
+
+    // 내부 input
+    const resultDiary = {...diary, diary: diaryValue};
+    setDiary(resultDiary);
     setDiaryValue('');
     setIsReset(true);
+
+    // diaryList 업데이트
+    setDiaryList(prev => [...prev, resultDiary]);
+    navigation.navigate('Home');
   };
 
   const handleChange = (value: string) => {
@@ -50,9 +58,9 @@ const MoodScreen = () => {
           </View>
 
           <DiaryInput
-            onChange={handleChange}
             isReset={isReset}
             setIsReset={setIsReset}
+            onChange={handleChange}
           />
         </View>
       </View>

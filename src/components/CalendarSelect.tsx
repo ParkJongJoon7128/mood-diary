@@ -1,9 +1,11 @@
-import React, {FC, useState} from 'react';
-import {Calendar} from 'react-native-calendars';
-import {View} from 'react-native';
-import {daysOfWeek} from '../data/common';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { FC, useState } from 'react';
+import { View } from 'react-native';
+import { Calendar } from 'react-native-calendars';
+import { useRecoilState } from 'recoil';
+import { daysOfWeek } from '../data/common';
+import { diaryState } from '../data/dataState';
 
 interface CalendarSelectProps {
   onClose: () => void;
@@ -15,6 +17,7 @@ const CalendarSelect: FC<CalendarSelectProps> = ({onClose, dateChange}) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ROOT_NAVIGATION>>();
 
+  const [diary, setDiary] = useRecoilState(diaryState);
   const [selected, setSelected] = useState('');
 
   const getDaysOfWeek = (year: number, month: number, day: number) => {
@@ -34,7 +37,13 @@ const CalendarSelect: FC<CalendarSelectProps> = ({onClose, dateChange}) => {
     )}`;
     dateChange(resultDate);
     onClose();
+    setRandomID();
     navigation.navigate('Mood');
+  };
+
+  const setRandomID = () => {
+    const id = new Date().getTime() * 1000 * 60;
+    setDiary(prev => ({...prev, id}));
   };
 
   // View

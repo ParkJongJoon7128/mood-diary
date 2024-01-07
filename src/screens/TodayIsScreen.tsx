@@ -1,17 +1,16 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
+import { useRecoilState } from 'recoil';
 import EmotionSelect from '../components/EmotionSelect';
-import {moods} from '../data/common';
-import {MoodType} from '../lib/type';
-import {useRecoilState} from 'recoil';
-import {diaryState} from '../data/dateState';
+import { moods } from '../data/common';
+import { diaryState } from '../data/dataState';
+import { MoodType } from '../lib/type';
 
 const TodayIsScreen = () => {
   // Logic
   const [diary, setDiary] = useRecoilState(diaryState);
 
   const handleEmotionChange = (mood: MoodType) => {
-    console.log('🚀 : data ==> ', mood);
     const result = {...diary, mood};
     setDiary(result);
   };
@@ -23,8 +22,8 @@ const TodayIsScreen = () => {
         title="오늘 하루는 어땠니?"
         moods={moods}
         emotionChange={handleEmotionChange}
-        diary={diary}
-        setDiary={setDiary}
+        // diary={diary}
+        // setDiary={setDiary}
       />
     </View>
   );

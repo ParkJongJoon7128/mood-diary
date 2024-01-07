@@ -1,4 +1,6 @@
-import React, {FC, useEffect, useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { FC, useEffect, useState } from 'react';
 import {
   NativeSyntheticEvent,
   TextInput,
@@ -13,6 +15,8 @@ interface DiaryInputProps {
 
 const DiaryInput: FC<DiaryInputProps> = ({isReset, setIsReset, onChange}) => {
   // Logic
+  const navigation =
+    useNavigation<NativeStackNavigationProp<ROOT_NAVIGATION>>();
   const [value, setValue] = useState('');
 
   const handleChange = (value: string) => {
@@ -27,6 +31,7 @@ const DiaryInput: FC<DiaryInputProps> = ({isReset, setIsReset, onChange}) => {
     event.preventDefault();
     setValue('');
     setIsReset(true);
+    navigation.navigate('Home');
   };
 
   useEffect(() => {
@@ -42,6 +47,7 @@ const DiaryInput: FC<DiaryInputProps> = ({isReset, setIsReset, onChange}) => {
       placeholder="일기를 써주세요"
       returnKeyType="done"
       onSubmitEditing={handleSubmit}
+      autoFocus={true}
     />
   );
 };
