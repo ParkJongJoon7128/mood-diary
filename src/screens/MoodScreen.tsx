@@ -11,6 +11,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import Date from '../components/Date';
 import DiaryInput from '../components/DiaryInput';
 import Emotion from '../components/Emotion';
+import Title from '../components/Title';
 import { diaryListState, diaryState } from '../data/dataState';
 
 const MoodScreen = () => {
@@ -55,8 +56,10 @@ const MoodScreen = () => {
         <View className="items-center justify-center">
           <View className="p-5">
             <Emotion data={mood} />
+            <View className="p-5">
+              <Title mainTitle={mood.description} />
+            </View>
           </View>
-
           <DiaryInput
             isReset={isReset}
             setIsReset={setIsReset}

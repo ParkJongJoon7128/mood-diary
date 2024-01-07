@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import { useRecoilValue } from 'recoil';
+import Emotion from '../components/Emotion';
 import Title from '../components/Title';
 import { diaryListState } from '../data/dataState';
 
@@ -22,7 +23,13 @@ const HomeScreen = () => {
     // View
     <View className="flex-1 items-center justify-center">
       <Title mainTitle={title} />
-      {/* <Emotion data={moods[0]} /> */}
+
+      <View className=" flex-row flex-wrap">
+        {diaryList.map(diary => (
+          <Emotion key={diary.id} data={diary.mood} />
+        ))}
+      </View>
+
       <ActionButton
         size={64}
         onPress={() => navigation.navigate('TodayIs')}
