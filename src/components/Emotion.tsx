@@ -45,14 +45,13 @@ const Emotion: FC<EmotionProps> = ({data, size}) => {
     }
   };
 
-  // View
   return (
     <View
       className={`w-${
-        size ? sizeList.find(item => item.size === size)?.width : 'fit'
-      } mx-auto`}>
+        size ? sizeList.find(item => item.size === size)?.width : 'w-auto'
+      }`}>
       <Image
-        className="w-full"
+        className={size === 'small' ? 'w-full' : 'w-auto'}
         resizeMode="contain"
         source={getEmotionImage(data.name)}
         alt={data.name}

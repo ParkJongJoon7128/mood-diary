@@ -27,13 +27,13 @@ const dayComponent: FC<dayComponentProps> = ({date}) => {
   // View
   return (
     <View className="flex-1">
-      <View className="flex-1 items-center">
+      <View className="flex-1">
         <TouchableOpacity>
           <Text className="text-black">{date?.day}</Text>
         </TouchableOpacity>
       </View>
       {isSelected && (
-        <View className="flex-1 pb-8 items-center justify-center">
+        <View className="flex-1">
           <Emotion data={existDate?.mood} size="small" />
         </View>
       )}
