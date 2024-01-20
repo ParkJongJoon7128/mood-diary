@@ -1,18 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import {
-  GestureResponderEvent,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import Date from '../components/Date';
 import DiaryInput from '../components/DiaryInput';
 import Emotion from '../components/Emotion';
 import Title from '../components/Title';
 import { diaryListState, diaryState } from '../data/dataState';
+import { OnPressHandleSubmitEvent } from '../lib/type';
 
 const MoodScreen = () => {
   // Logic
@@ -26,7 +22,7 @@ const MoodScreen = () => {
   const {date, mood} = diary;
   const setDiaryList = useSetRecoilState(diaryListState);
 
-  const handleSubmit = (event: GestureResponderEvent) => {
+  const handleSubmit = (event: OnPressHandleSubmitEvent) => {
     event.preventDefault();
 
     // 내부 input
@@ -45,8 +41,8 @@ const MoodScreen = () => {
     isReset && setIsReset(false);
   };
 
+  // View
   return (
-    // View
     <View className="flex-1 p-4">
       <View className="border border-mood-gray-700 rounded-xl p-5">
         <View>
@@ -62,8 +58,9 @@ const MoodScreen = () => {
           </View>
           <DiaryInput
             isReset={isReset}
-            setIsReset={setIsReset}
             onChange={handleChange}
+            handleSubmit={handleSubmit}
+            // setIsReset={setIsReset}
           />
         </View>
       </View>

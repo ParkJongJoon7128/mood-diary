@@ -1,3 +1,5 @@
+import { GestureResponderEvent } from "react-native";
+
 export interface MoodType {
   id: number;
   name: string;
@@ -19,3 +21,5 @@ export interface DateType {
   totalDate: string;
   totalText: string;
 }
+
+export type OnPressHandleSubmitEvent = GestureResponderEvent;
