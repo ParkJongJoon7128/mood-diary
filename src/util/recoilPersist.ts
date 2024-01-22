@@ -1,17 +1,23 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AtomEffect, DefaultValue } from 'recoil';
+import { AtomEffect } from 'recoil';
 
 export const persistAtom =
   <T>(key: string): AtomEffect<T> =>
-  ({setSelf, onSet}) => {
-    setSelf(
-      AsyncStorage.getItem(key).then(
-        savedValue =>
-          savedValue != null ? JSON.parse(savedValue) : new DefaultValue(), // Abort initialization if no value was stored
-      ),
-    );
+  ({setSelf, onSet, trigger}) => {
+    const loadPersisted = async () => {
+      const savedValue = await AsyncStorage.getItem(key);
 
-    // Subscribe to state changes and persist them to localForage
+      if (savedValue != null) {
+        setSelf(JSON.parse(savedValue));
+      }
+    };
+
+    // Asynchronously set the persisted data
+    if (trigger === 'get') {
+      loadPersisted();
+    }
+
+    // Subscribe to state changes and persist them to AsyncStorage
     onSet((newValue, _, isReset) => {
       isReset
         ? AsyncStorage.removeItem(key)

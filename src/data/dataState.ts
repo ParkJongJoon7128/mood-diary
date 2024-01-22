@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 import { DiaryType } from '../lib/type';
+import { persistAtom } from '../util/recoilPersist';
 import { initialDiary } from './initialState';
 
 export const diaryState = atom<DiaryType>({
@@ -10,5 +11,5 @@ export const diaryState = atom<DiaryType>({
 export const diaryListState = atom<DiaryType[]>({
   key: 'diaryListState',
   default: [],
-  // effects_UNSTABLE: [persistAtom('diaryListState')],
+  effects: [persistAtom('diaryListState')],
 });

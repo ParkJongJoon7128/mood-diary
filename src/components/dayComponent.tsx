@@ -6,11 +6,11 @@ import { totalDate } from '../data/common';
 import { diaryListState } from '../data/dataState';
 import Emotion from './Emotion';
 
-interface dayComponentProps {
+interface DayComponentProps {
   date: DateData | undefined;
 }
 
-const dayComponent: FC<dayComponentProps> = ({date}) => {
+const DayComponent: FC<DayComponentProps> = ({date}) => {
   // Logic
   const diaryList = useRecoilValue(diaryListState);
   const year = date?.year;
@@ -41,4 +41,4 @@ const dayComponent: FC<dayComponentProps> = ({date}) => {
   );
 };
 
-export default dayComponent;
+export default DayComponent;

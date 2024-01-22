@@ -53,7 +53,7 @@ const Emotion: FC<EmotionProps> = ({data, size}) => {
     // }`}
     >
       <Image
-        className={size === 'small' ? ' w-10' : 'w-auto'}
+        className={size === 'small' ? 'w-10' : 'w-auto'}
         resizeMode="contain"
         source={getEmotionImage(data.name)}
         alt={data.name}
