@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC, useState } from 'react';
 import { View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { daysOfWeek, totalDate } from '../data/common';
 import { diaryState } from '../data/dataState';
 import { DateType } from '../lib/type';
@@ -18,7 +18,7 @@ const CalendarSelect: FC<CalendarSelectProps> = ({onClose, dateChange}) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ROOT_NAVIGATION>>();
 
-  const [diary, setDiary] = useRecoilState(diaryState);
+  const setDiary = useSetRecoilState(diaryState);
   const [selected, setSelected] = useState('');
 
   const handleChange = (value: any | null) => {
@@ -31,7 +31,7 @@ const CalendarSelect: FC<CalendarSelectProps> = ({onClose, dateChange}) => {
       year: year,
       month: month,
       day: day,
-      dayOfWeeks: dayOfWeeks,
+      daysOfWeeks: dayOfWeeks,
       totalDate: totalDate(year, month, day),
       totalText: totalText,
     };

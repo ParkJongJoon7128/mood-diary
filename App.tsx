@@ -9,6 +9,7 @@ import { Text, View } from 'react-native';
 import { RecoilRoot } from 'recoil';
 import Layout from './src/components/layout/Layout';
 import HomeScreen from './src/screens/HomeScreen';
+import ItemScreen from './src/screens/ItemScreen';
 import MoodScreen from './src/screens/MoodScreen';
 import TodayIsScreen from './src/screens/TodayIsScreen';
 
@@ -34,6 +35,7 @@ function App(): JSX.Element {
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Mood" component={MoodScreen} />
               <Stack.Screen name="TodayIs" component={TodayIsScreen} />
+              <Stack.Screen name="Item" component={ItemScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </Layout>

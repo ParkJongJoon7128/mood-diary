@@ -9,21 +9,6 @@ interface EmotionProps {
 
 const Emotion: FC<EmotionProps> = ({data, size}) => {
   // Logic
-  const sizeList = [
-    {
-      size: 'small',
-      width: '8',
-    },
-    {
-      size: 'medium',
-      width: '12',
-    },
-    {
-      size: 'large',
-      width: '24',
-    },
-  ];
-
   const getEmotionImage = (name: string) => {
     switch (name) {
       case 'annoying':

@@ -5,13 +5,17 @@ import { TextInput } from 'react-native';
 
 interface DiaryInputProps {
   isReset: boolean;
-  onChange: (value: string) => void;
-  handleSubmit: (event: any) => void;
+  readOnly?: boolean;
+  value?: string,
+  onChange?: (value: string) => void;
+  handleSubmit?: (event: any) => void;
   // setIsReset: (value: boolean) => void;
 }
 
 const DiaryInput: FC<DiaryInputProps> = ({
   isReset,
+  readOnly,
+  value,
   onChange,
   handleSubmit,
   // setIsReset,
@@ -19,26 +23,27 @@ const DiaryInput: FC<DiaryInputProps> = ({
   // Logic
   const navigation =
     useNavigation<NativeStackNavigationProp<ROOT_NAVIGATION>>();
-  const [value, setValue] = useState('');
+  const [input, setInput] = useState('');
 
   const handleChange = (value: string) => {
     // const {value} = event.target;
-    setValue(value);
-    onChange(value);
+    setInput(value);
+    onChange && onChange(value);
   };
 
   useEffect(() => {
-    isReset && setValue('');
+    isReset && setInput('');
   }, [isReset]);
   return (
     <TextInput
       className="w-full rounded-md px-4 py-2 bg-purple-200"
       onChangeText={handleChange}
-      value={value}
+      value={value || input}
       placeholder="일기를 써주세요"
       returnKeyType="done"
       onSubmitEditing={handleSubmit}
       autoFocus={true}
+      readOnly={!!readOnly}
     />
   );
 };

@@ -1,3 +1,5 @@
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { DateData } from 'react-native-calendars';
@@ -23,18 +25,32 @@ const DayComponent: FC<DayComponentProps> = ({date}) => {
   );
 
   const isSelected = !!existDate;
+  const navigation =
+    useNavigation<NativeStackNavigationProp<ROOT_NAVIGATION>>();
+
+  const onClickEmogi = (totalDate: string) => {
+    const selectedDiary = diaryList.find(
+      diary => diary.date.totalDate === totalDate,
+    );
+    console.log('🚀 : selectedDiary ==> ', selectedDiary);
+    navigation.navigate('Item', {
+      itemId: selectedDiary?.id,
+      }
+    );
+  };
 
   // View
   return (
     <View className="flex-1 w-full">
       <View className="items-center">
-        <TouchableOpacity>
-          <Text className="text-black">{date?.day}</Text>
-        </TouchableOpacity>
+        <Text className="text-black">{date?.day}</Text>
       </View>
       {isSelected && (
         <View className="flex-1 items-center justify-center">
-          <Emotion data={existDate?.mood} size="small" />
+          <TouchableOpacity
+            onPress={() => onClickEmogi(existDate.date.totalDate)}>
+            <Emotion data={existDate?.mood} size="small" />
+          </TouchableOpacity>
         </View>
       )}
     </View>
