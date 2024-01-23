@@ -1,6 +1,8 @@
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
-import { useRecoilValue } from 'recoil';
+import { Alert, Image, TouchableOpacity, View } from 'react-native';
+import { useRecoilState } from 'recoil';
 import Date from '../components/Date';
 import DiaryInput from '../components/DiaryInput';
 import Emotion from '../components/Emotion';
@@ -11,16 +13,40 @@ import { DiaryType } from '../lib/type';
 const ItemScreen = ({route}) => {
   // Logic
   const {itemId} = route.params;
+  const navigation =
+    useNavigation<NativeStackNavigationProp<ROOT_NAVIGATION>>();
 
-  const diaryList = useRecoilValue(diaryListState);
+  const [diaryList, setDiaryList] = useRecoilState(diaryListState);
   const [selectedDiary, setSelectedDiary] = useState<DiaryType | null>(null);
 
-  const modifyDiary = (data: any) => {
-    console.log('test', data);
-  };
+  const updateDiary = (data: any) => {};
 
-  const removeDiary = (data: any) => {
-    console.log('test', data);
+  const removeDiary = () => {
+    Alert.alert(
+      '해당 diary를 삭제하시겠습니까?',
+      '삭제하면 데이터를 복구할 수 없습니다.',
+      [
+        {
+          text: '취소',
+          style: 'cancel',
+        },
+        {
+          text: '삭제',
+          onPress: async () => {
+            try {
+              const filterDiaryList = diaryList.filter(
+                diary => diary.id !== itemId,
+              );
+              setDiaryList(filterDiaryList);
+              navigation.navigate('Home');
+            } catch (error) {
+              console.log('error', error);
+            }
+          },
+          style: 'destructive',
+        },
+      ],
+    );
   };
 
   useEffect(() => {
@@ -37,7 +63,7 @@ const ItemScreen = ({route}) => {
           <View className="flex-row justify-between items-center">
             <Date date={selectedDiary.date.totalText} />
             <View className="flex flex-row items-center">
-              <TouchableOpacity onPress={data => modifyDiary(data)}>
+              <TouchableOpacity onPress={data => updateDiary(data)}>
                 <Image
                   className="w-7 h-7 mr-4"
                   source={require('../public/images/pencil.png')}
@@ -45,7 +71,7 @@ const ItemScreen = ({route}) => {
                   alt="수정"
                 />
               </TouchableOpacity>
-              <TouchableOpacity onPress={data => removeDiary(data)}>
+              <TouchableOpacity onPress={removeDiary}>
                 <Image
                   className="w-7 h-7"
                   source={require('../public/images/trash.png')}
