@@ -1,5 +1,5 @@
-import React, {FC} from 'react';
-import {ImageBackground} from 'react-native';
+import React, { FC } from 'react';
+import { ImageBackground } from 'react-native';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({children}) => {
   return (
     <ImageBackground
-      source={require('../../public/images/BackgroundCell.png')}
+      source={require("../../public/images/BackgroundCell.png")}
       resizeMode={'repeat'}
       className="flex-1 overflow-hidden">
       {children}

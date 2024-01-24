@@ -7,6 +7,7 @@ import {
 import React from 'react';
 import { Text, View } from 'react-native';
 import { RecoilRoot } from 'recoil';
+import BackButton from './src/components/BackButton';
 import Layout from './src/components/layout/Layout';
 import HomeScreen from './src/screens/HomeScreen';
 import ItemScreen from './src/screens/ItemScreen';
@@ -29,13 +30,40 @@ function App(): JSX.Element {
             <Stack.Navigator
               initialRouteName="Home"
               screenOptions={{
-                headerShown: true,
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
               }}>
-              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{headerShown: false}}
+              />
               <Stack.Screen name="Mood" component={MoodScreen} />
-              <Stack.Screen name="TodayIs" component={TodayIsScreen} />
-              <Stack.Screen name="Item" component={ItemScreen} />
+              <Stack.Screen
+                name="TodayIs"
+                component={TodayIsScreen}
+                options={{
+                  headerShown: true,
+                  title: '',
+                  headerLeft: () => {
+                    return <BackButton />;
+                  },
+                }}
+              />
+              <Stack.Screen
+                name="Item"
+                component={ItemScreen}
+                options={{
+                  headerStyle: {
+                    backgroundColor: 'transparent'
+                  },
+                  headerShown: true,
+                  headerTransparent: false,
+                  title: '',
+                  headerLeft: () => {
+                    return <BackButton />;
+                  },
+                }}
+              />
             </Stack.Navigator>
           </NavigationContainer>
         </Layout>
