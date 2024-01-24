@@ -65,9 +65,16 @@ const MoodScreen = () => {
         </View>
       </View>
 
-      <View className="flex-1 items-center justify-center pt-8">
+      <View className="flex-row items-center justify-between my-10">
         <TouchableOpacity onPress={handleSubmit}>
-          <Text>일기 저장하기</Text>
+          <View className="px-12 py-5 items-center justify-center rounded-full bg-blue-500">
+            <Text className="text-white">일기 저장하기</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <View className="px-12 py-5 items-center justify-center rounded-full bg-red-500">
+            <Text className="text-white">입력 취소하기</Text>
+          </View>
         </TouchableOpacity>
       </View>
     </View>

@@ -32,11 +32,7 @@ const DayComponent: FC<DayComponentProps> = ({date}) => {
     const selectedDiary = diaryList.find(
       diary => diary.date.totalDate === totalDate,
     );
-    console.log('🚀 : selectedDiary ==> ', selectedDiary);
-    navigation.navigate('Item', {
-      itemId: selectedDiary?.id,
-      }
-    );
+    navigation.navigate('Item', {itemId: selectedDiary?.id});
   };
 
   // View

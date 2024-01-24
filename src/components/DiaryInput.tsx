@@ -1,12 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 
 interface DiaryInputProps {
   isReset: boolean;
   readOnly?: boolean;
   value?: string,
+  bgColor?: string,
+  isFocus?: boolean,
   onChange?: (value: string) => void;
   handleSubmit?: (event: any) => void;
   // setIsReset: (value: boolean) => void;
@@ -16,6 +18,8 @@ const DiaryInput: FC<DiaryInputProps> = ({
   isReset,
   readOnly,
   value,
+  bgColor,
+  isFocus,
   onChange,
   handleSubmit,
   // setIsReset,
@@ -24,6 +28,7 @@ const DiaryInput: FC<DiaryInputProps> = ({
   const navigation =
     useNavigation<NativeStackNavigationProp<ROOT_NAVIGATION>>();
   const [input, setInput] = useState('');
+  const inputRef = useRef<TextInput | null>(null);
 
   const handleChange = (value: string) => {
     // const {value} = event.target;
@@ -34,16 +39,26 @@ const DiaryInput: FC<DiaryInputProps> = ({
   useEffect(() => {
     isReset && setInput('');
   }, [isReset]);
+
+  useEffect(() => {
+    value && setInput(value);
+  }, [value]);
+
+  useEffect(() => {
+    isFocus && inputRef.current && inputRef.current.focus()
+  }, [isFocus])
+
   return (
     <TextInput
-      className="w-full rounded-md px-4 py-2 bg-purple-200"
+      className={`${bgColor || ' bg-yellow-200'} w-full rounded-md px-4 py-2 `}
       onChangeText={handleChange}
-      value={value || input}
+      value={input}
       placeholder="일기를 써주세요"
       returnKeyType="done"
       onSubmitEditing={handleSubmit}
       autoFocus={true}
       readOnly={!!readOnly}
+      ref={inputRef}
     />
   );
 };

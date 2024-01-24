@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { Alert, Image, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 import Date from '../components/Date';
 import DiaryInput from '../components/DiaryInput';
@@ -16,14 +16,27 @@ const ItemScreen = ({route}) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ROOT_NAVIGATION>>();
 
-  const [diaryList, setDiaryList] = useRecoilState(diaryListState);
+  const [diaryList, setDiaryValueList] = useRecoilState(diaryListState);
   const [selectedDiary, setSelectedDiary] = useState<DiaryType | null>(null);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [diaryValue, setDiaryValue] = useState('');
 
-  const updateDiary = (data: any) => {};
+  const changeEditMode = () => {
+    setIsEditMode(true);
+  };
+
+  const handleCancel = () => {
+    setIsEditMode(false);
+    selectedDiary && setDiaryValue(selectedDiary?.diary);
+  };
+
+  const handleChange = (value: string) => {
+    setDiaryValue(value);
+  };
 
   const removeDiary = () => {
     Alert.alert(
-      '해당 diary를 삭제하시겠습니까?',
+      '해당 일기를 삭제하시겠습니까?',
       '삭제하면 데이터를 복구할 수 없습니다.',
       [
         {
@@ -37,7 +50,7 @@ const ItemScreen = ({route}) => {
               const filterDiaryList = diaryList.filter(
                 diary => diary.id !== itemId,
               );
-              setDiaryList(filterDiaryList);
+              setDiaryValueList(filterDiaryList);
               navigation.navigate('Home');
             } catch (error) {
               console.log('error', error);
@@ -49,10 +62,20 @@ const ItemScreen = ({route}) => {
     );
   };
 
+  const updateDiary = () => {
+    const updateDiaryList = diaryList.map(item => {
+      return item.id === itemId ? {...item, diary: diaryValue} : item;
+    });
+    setDiaryValueList(updateDiaryList);
+    setIsEditMode(false);
+  };
+
   useEffect(() => {
     const item = itemId && diaryList.find(diary => diary.id === itemId);
 
-    item && setSelectedDiary(item);
+    if (!item) return;
+    setSelectedDiary(item);
+    setDiaryValue(item.diary);
   }, [diaryList, itemId]);
 
   // View
@@ -63,17 +86,21 @@ const ItemScreen = ({route}) => {
           <View className="flex-row justify-between items-center">
             <Date date={selectedDiary.date.totalText} />
             <View className="flex flex-row items-center">
-              <TouchableOpacity onPress={data => updateDiary(data)}>
+              <TouchableOpacity disabled={isEditMode} onPress={changeEditMode}>
                 <Image
-                  className="w-7 h-7 mr-4"
+                  className={`w-7 h-7 mr-4 ${
+                    isEditMode ? 'opacity-20' : 'opacity-100'
+                  }`}
                   source={require('../public/images/pencil.png')}
                   resizeMode="contain"
                   alt="수정"
                 />
               </TouchableOpacity>
-              <TouchableOpacity onPress={removeDiary}>
+              <TouchableOpacity disabled={isEditMode} onPress={removeDiary}>
                 <Image
-                  className="w-7 h-7"
+                  className={`w-7 h-7 ${
+                    isEditMode ? 'opacity-20' : 'opacity-100'
+                  }`}
                   source={require('../public/images/trash.png')}
                   resizeMode="contain"
                   alt="삭제"
@@ -90,11 +117,29 @@ const ItemScreen = ({route}) => {
               </View>
             </View>
             <DiaryInput
-              readOnly={true}
+              readOnly={!isEditMode}
               isReset={false}
-              value={selectedDiary.diary}
+              value={diaryValue}
+              bgColor={isEditMode ? '' : 'bg-purple-200'}
+              isFocus={isEditMode}
+              onChange={handleChange}
             />
           </View>
+        </View>
+      )}
+
+      {isEditMode && (
+        <View className="flex-row items-center justify-between my-10">
+          <TouchableOpacity onPress={updateDiary}>
+            <View className="px-12 py-5 items-center justify-center rounded-full bg-blue-500">
+              <Text className="text-white">일기 수정하기</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleCancel}>
+            <View className="px-12 py-5 items-center justify-center rounded-full bg-red-500">
+              <Text className="text-white">수정 취소하기</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       )}
     </View>
@@ -102,24 +147,3 @@ const ItemScreen = ({route}) => {
 };
 
 export default ItemScreen;
-
-// {
-/* <Image
-  className="w-10"
-  source={require('../public/images/trash.png')}
-/>
-<Image
-  className="w-10"
-  source={require('../public/images/pencil.png')}
-/> */
-// }
-
-// {
-/* <View className="flex-1 items-center justify-center pt-8">
-  <TouchableOpacity
-  // onPress={handleSubmit}
-  >
-    <Text>일기 저장하기</Text>
-  </TouchableOpacity>
-</View> */
-// }
