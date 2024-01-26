@@ -1,12 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import Date from '../components/Date';
 import DiaryInput from '../components/DiaryInput';
 import Emotion from '../components/Emotion';
 import Title from '../components/Title';
+import Layout from '../components/layout/Layout';
 import { diaryListState, diaryState } from '../data/dataState';
 import { OnPressHandleSubmitEvent } from '../lib/type';
 
@@ -43,41 +45,30 @@ const MoodScreen = () => {
 
   // View
   return (
-    <View className="flex-1 p-4">
-      <View className="border border-mood-gray-700 rounded-xl p-5">
-        <View>
-          <Date date={date.totalText} />
-        </View>
+    <Layout>
+      <SafeAreaView className="flex-1 p-4">
+        <View className="border border-mood-gray-700 rounded-xl p-5">
+          <View>
+            <Date date={date.totalText} />
+          </View>
 
-        <View className="items-center justify-center">
-          <View className="p-5">
-            <Emotion data={mood} size="large" />
+          <View className="items-center justify-center">
             <View className="p-5">
-              <Title mainTitle={mood.description} />
+              <Emotion data={mood} size="large" />
+              <View className="p-5">
+                <Title mainTitle={mood.description} />
+              </View>
             </View>
+            <DiaryInput
+              isReset={isReset}
+              onChange={handleChange}
+              handleSubmit={handleSubmit}
+              // setIsReset={setIsReset}
+            />
           </View>
-          <DiaryInput
-            isReset={isReset}
-            onChange={handleChange}
-            handleSubmit={handleSubmit}
-            // setIsReset={setIsReset}
-          />
         </View>
-      </View>
-
-      <View className="flex-row items-center justify-between my-10">
-        <TouchableOpacity onPress={handleSubmit}>
-          <View className="px-12 py-5 items-center justify-center rounded-full bg-blue-500">
-            <Text className="text-white">일기 저장하기</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <View className="px-12 py-5 items-center justify-center rounded-full bg-red-500">
-            <Text className="text-white">입력 취소하기</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
+      </SafeAreaView>
+    </Layout>
   );
 };
 

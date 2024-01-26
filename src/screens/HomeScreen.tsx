@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
 import ActionButton from 'react-native-action-button';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRecoilValue } from 'recoil';
 import CalendarView from '../components/CalendarView';
+import Layout from '../components/layout/Layout';
 import { diaryListState } from '../data/dataState';
 
 const HomeScreen = () => {
@@ -19,15 +20,17 @@ const HomeScreen = () => {
 
   // View
   return (
-    <View className="flex-1">
-      <CalendarView />
-      <ActionButton
-        size={64}
-        onPress={() => navigation.navigate('TodayIs')}
-        buttonColor="#2196f3"
-        position="right"
-      />
-    </View>
+    <Layout>
+      <SafeAreaView className="flex-1">
+        <CalendarView />
+        <ActionButton
+          size={64}
+          onPress={() => navigation.navigate('TodayIs')}
+          buttonColor="#2196f3"
+          position="right"
+        />
+      </SafeAreaView>
+    </Layout>
   );
 };
 

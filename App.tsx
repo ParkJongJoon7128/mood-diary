@@ -8,7 +8,6 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { RecoilRoot } from 'recoil';
 import BackButton from './src/components/BackButton';
-import Layout from './src/components/layout/Layout';
 import HomeScreen from './src/screens/HomeScreen';
 import ItemScreen from './src/screens/ItemScreen';
 import MoodScreen from './src/screens/MoodScreen';
@@ -25,7 +24,6 @@ function App(): JSX.Element {
             <Text>Loading</Text>
           </View>
         }>
-        <Layout>
           <NavigationContainer>
             <Stack.Navigator
               initialRouteName="Home"
@@ -37,12 +35,30 @@ function App(): JSX.Element {
                 component={HomeScreen}
                 options={{headerShown: false}}
               />
-              <Stack.Screen name="Mood" component={MoodScreen} />
+              <Stack.Screen
+                name="Mood"
+                component={MoodScreen}
+                options={{
+                  headerStyle: {
+                    backgroundColor: 'transparent',
+                  },
+                  headerShown: true,
+                  headerTransparent: false,
+                  title: '',
+                  headerLeft: () => {
+                    return <BackButton />;
+                  },
+                }}
+              />
               <Stack.Screen
                 name="TodayIs"
                 component={TodayIsScreen}
                 options={{
+                  headerStyle: {
+                    backgroundColor: 'transparent',
+                  },
                   headerShown: true,
+                  headerTransparent: true,
                   title: '',
                   headerLeft: () => {
                     return <BackButton />;
@@ -54,7 +70,7 @@ function App(): JSX.Element {
                 component={ItemScreen}
                 options={{
                   headerStyle: {
-                    backgroundColor: 'transparent'
+                    backgroundColor: 'transparent',
                   },
                   headerShown: true,
                   headerTransparent: false,
@@ -66,7 +82,6 @@ function App(): JSX.Element {
               />
             </Stack.Navigator>
           </NavigationContainer>
-        </Layout>
       </React.Suspense>
     </RecoilRoot>
   );

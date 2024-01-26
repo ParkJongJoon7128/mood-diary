@@ -4,6 +4,8 @@ import { colors } from 'react-native-tailwindcss';
 
 export const CalendarTheme: Theme = {
   textDayFontSize: 10,
+  backgroundColor: 'transparent',
+  calendarBackground: 'transparent',
   //   @ts-expect-error
   'stylesheet.calendar.header': {
     week: {
