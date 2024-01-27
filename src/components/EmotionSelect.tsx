@@ -88,17 +88,16 @@ const EmotionSelect: FC<EmotionSelectProps> = ({
 
       <View>
         <Modal
+          className="flex-1"
           animationIn={'slideInUp'}
           animationOut={'slideOutDown'}
           isVisible={visibleCalendar}
           onBackButtonPress={() => setVisibleCalendar(false)}
           onBackdropPress={() => setVisibleCalendar(false)}>
-          <View className="flex-1 justify-center items-cente">
-            <CalendarSelect
-              onClose={() => setVisibleCalendar(false)}
-              dateChange={handleDateChange}
-            />
-          </View>
+          <CalendarSelect
+            onClose={() => setVisibleCalendar(false)}
+            dateChange={handleDateChange}
+          />
         </Modal>
       </View>
     </View>

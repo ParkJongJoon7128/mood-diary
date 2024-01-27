@@ -6,9 +6,9 @@ import { TextInput } from 'react-native';
 interface DiaryInputProps {
   isReset: boolean;
   readOnly?: boolean;
-  value?: string,
-  bgColor?: string,
-  isFocus?: boolean,
+  value?: string;
+  bgColor?: string;
+  isFocus?: boolean;
   onChange?: (value: string) => void;
   handleSubmit?: (event: any) => void;
   // setIsReset: (value: boolean) => void;
@@ -22,7 +22,6 @@ const DiaryInput: FC<DiaryInputProps> = ({
   isFocus,
   onChange,
   handleSubmit,
-  // setIsReset,
 }) => {
   // Logic
   const navigation =
@@ -31,7 +30,6 @@ const DiaryInput: FC<DiaryInputProps> = ({
   const inputRef = useRef<TextInput | null>(null);
 
   const handleChange = (value: string) => {
-    // const {value} = event.target;
     setInput(value);
     onChange && onChange(value);
   };
@@ -45,8 +43,8 @@ const DiaryInput: FC<DiaryInputProps> = ({
   }, [value]);
 
   useEffect(() => {
-    isFocus && inputRef.current && inputRef.current.focus()
-  }, [isFocus])
+    isFocus && inputRef.current && inputRef.current.focus();
+  }, [isFocus]);
 
   return (
     <TextInput

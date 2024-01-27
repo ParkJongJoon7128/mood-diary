@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import Date from '../components/Date';
 import DiaryInput from '../components/DiaryInput';
@@ -46,7 +45,7 @@ const MoodScreen = () => {
   // View
   return (
     <Layout>
-      <SafeAreaView className="flex-1 p-4">
+      <View className="flex-1 p-4">
         <View className="border border-mood-gray-700 rounded-xl p-5">
           <View>
             <Date date={date.totalText} />
@@ -63,11 +62,10 @@ const MoodScreen = () => {
               isReset={isReset}
               onChange={handleChange}
               handleSubmit={handleSubmit}
-              // setIsReset={setIsReset}
             />
           </View>
         </View>
-      </SafeAreaView>
+      </View>
     </Layout>
   );
 };

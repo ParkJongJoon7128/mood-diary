@@ -49,7 +49,7 @@ const CalendarSelect: FC<CalendarSelectProps> = ({onClose, dateChange}) => {
 
   // View
   return (
-    <View className="flex-1 justify-center w-full">
+    <View>
       <Calendar
         className="pt-2 pb-2"
         onDayPress={data => {
