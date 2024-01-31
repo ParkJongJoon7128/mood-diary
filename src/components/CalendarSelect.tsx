@@ -7,6 +7,8 @@ import { useSetRecoilState } from 'recoil';
 import { daysOfWeek, totalDate } from '../data/common';
 import { diaryState } from '../data/dataState';
 import { DateType } from '../lib/type';
+import { CalendarSelectTheme } from '../public/theme/CalendarSelectTheme';
+import CalendarSelectDayComponent from './CalendarSelectDayComponent';
 
 interface CalendarSelectProps {
   onClose: () => void;
@@ -52,23 +54,18 @@ const CalendarSelect: FC<CalendarSelectProps> = ({onClose, dateChange}) => {
     <View>
       <Calendar
         className="pt-2 pb-2"
+        monthFormat={'yyyy년 MM월'}
+        theme={CalendarSelectTheme}
         onDayPress={data => {
           setSelected(data.dateString);
           handleChange(data);
         }}
-        markedDates={{
-          [selected]: {
-            selected: true,
-            disableTouchEvent: true,
-          },
-        }}
-        theme={{
-          selectedDayBackgroundColor: '#00adf5',
-          selectedDayTextColor: '#ffffff',
-          dayTextColor: '#2d4150',
-          textDisabledColor: '#d9e',
-        }}
-        monthFormat={'yyyy년 MM월'}
+        dayComponent={item => (
+          <CalendarSelectDayComponent
+            date={item.date}
+            handleChange={handleChange}
+          />
+        )}
       />
     </View>
   );

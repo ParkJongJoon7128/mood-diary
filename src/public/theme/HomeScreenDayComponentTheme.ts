@@ -2,7 +2,7 @@ import { TextStyle, ViewStyle } from 'react-native';
 import { Theme } from 'react-native-calendars/src/types';
 import { colors } from 'react-native-tailwindcss';
 
-export const CalendarTheme: Theme = {
+export const HomeScreenDayComponentTheme: Theme = {
   textDayFontSize: 10,
   backgroundColor: 'transparent',
   calendarBackground: 'transparent',

@@ -1,13 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import { CalendarList, LocaleConfig } from 'react-native-calendars';
-import { CalendarLocales } from '../public/config/config';
-import { CalendarTheme } from '../public/theme/theme';
-import dayComponent from './dayComponent';
-
-LocaleConfig.locales['kr'] = CalendarLocales;
-LocaleConfig.defaultLocale = 'kr';
-
+import { CalendarList } from 'react-native-calendars';
+import { HomeScreenDayComponentTheme } from '../public/theme/HomeScreenDayComponentTheme';
+import HomeScreenDayComponent from './HomeScreenDayComponent';
 const CalendarView = () => {
   // Logic
 
@@ -19,8 +14,8 @@ const CalendarView = () => {
         horizontal={true}
         pagingEnabled={true}
         monthFormat={'yyyy년 MM월'}
-        dayComponent={dayComponent}
-        theme={CalendarTheme}
+        dayComponent={HomeScreenDayComponent}
+        theme={HomeScreenDayComponentTheme}
       />
     </View>
   );

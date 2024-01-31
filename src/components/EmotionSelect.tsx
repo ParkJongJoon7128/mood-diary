@@ -10,16 +10,12 @@ interface EmotionSelectProps {
   title: string;
   moods: MoodType[];
   emotionChange: (data: MoodType) => void;
-  // diary: DiaryType;
-  // setDiary: React.Dispatch<React.SetStateAction<DiaryType>>;
 }
 
 const EmotionSelect: FC<EmotionSelectProps> = ({
   title,
   moods,
   emotionChange,
-  // diary,
-  // setDiary,
 }) => {
   // Logic
   const [selectedMood, setSelectedMood] = useState(null);
