@@ -26,9 +26,4 @@ export const CalendarSelectTheme: Theme = {
       padding: 15,
     } as ViewStyle,
   },
-  'stylesheet.day.basic': {
-    todayText: {
-      color: colors.blue500,
-    } as TextStyle,
-  },
 };

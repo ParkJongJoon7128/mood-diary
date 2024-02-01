@@ -60,9 +60,10 @@ const CalendarSelect: FC<CalendarSelectProps> = ({onClose, dateChange}) => {
           setSelected(data.dateString);
           handleChange(data);
         }}
-        dayComponent={item => (
+        dayComponent={({date, state}) => (
           <CalendarSelectDayComponent
-            date={item.date}
+            date={date}
+            state={state}
             handleChange={handleChange}
           />
         )}
