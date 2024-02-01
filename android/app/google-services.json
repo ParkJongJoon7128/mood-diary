@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "883256986628",
+    "project_id": "mooddiaryapp-android",
+    "storage_bucket": "mooddiaryapp-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883256986628:android:e42d9c710d464c72d33951",
+        "android_client_info": {
+          "package_name": "com.testapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8W9RpdhlFxMf9YnRByWV_dgdDziqeYEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
