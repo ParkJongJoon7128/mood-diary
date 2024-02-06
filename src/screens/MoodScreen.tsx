@@ -10,6 +10,7 @@ import Title from '../components/Title';
 import Layout from '../components/layout/Layout';
 import { diaryListState, diaryState } from '../data/dataState';
 import { OnPressHandleSubmitEvent } from '../lib/type';
+import { onCreateTriggerNotification } from '../util/LocalNotification';
 
 const MoodScreen = () => {
   // Logic
@@ -34,6 +35,7 @@ const MoodScreen = () => {
 
     // diaryList 업데이트
     setDiaryList(prev => [...prev, resultDiary]);
+    onCreateTriggerNotification();
     navigation.navigate('Home');
   };
 

@@ -1,5 +1,5 @@
+import notifee, { EventType } from '@notifee/react-native';
 import { NavigationContainer } from '@react-navigation/native';
-
 import {
   CardStyleInterpolators,
   createStackNavigator,
@@ -8,19 +8,45 @@ import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
 import { RecoilRoot } from 'recoil';
 import BackButton from './src/components/BackButton';
-import { requestPermission } from './src/public/cloud_message/LocalNotification';
 import HomeScreen from './src/screens/HomeScreen';
 import ItemScreen from './src/screens/ItemScreen';
 import MoodScreen from './src/screens/MoodScreen';
 import TodayIsScreen from './src/screens/TodayIsScreen';
+import {
+  requestAndroidPermissionSettings,
+  requestUserPermission
+} from './src/util/LocalNotification';
 
 const Stack = createStackNavigator<ROOT_NAVIGATION>();
 
 function App(): JSX.Element {
+  // Permission Setting
   useEffect(() => {
-    requestPermission();
+    requestUserPermission();
   }, []);
 
+  useEffect(() => {
+    requestAndroidPermissionSettings();
+  }, [])
+
+  // Subscribe to events
+  useEffect(() => {
+    return notifee.onForegroundEvent(({type, detail}) => {
+      switch (type) {
+        case EventType.DISMISSED:
+          console.log('User dismissed notification', detail.notification);
+          break;
+        case EventType.PRESS:
+          // App launched, remove the badge count
+          notifee
+            .setBadgeCount(0)
+            .then(() => console.log('Badge count removed'));
+          console.log('User pressed notification', detail.notification);
+          break;
+      }
+    });
+  }, []);
+  
   return (
     <RecoilRoot>
       <React.Suspense
