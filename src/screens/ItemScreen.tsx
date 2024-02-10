@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRecoilState } from 'recoil';
-import Date from '../components/Date';
+import DateString from '../components/DateString';
 import DiaryInput from '../components/DiaryInput';
 import Emotion from '../components/Emotion';
 import Title from '../components/Title';
@@ -91,7 +91,7 @@ const ItemScreen = ({route}) => {
           {selectedDiary && (
             <View className="border border-mood-gray-700 rounded-xl p-5">
               <View className="flex-row justify-between items-center">
-                <Date date={selectedDiary.date.totalText} />
+                <DateString date={selectedDiary.date.totalText} />
                 <View className="flex flex-row items-center">
                   <TouchableOpacity
                     disabled={isEditMode}

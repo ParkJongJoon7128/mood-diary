@@ -11,6 +11,7 @@ import Layout from '../components/layout/Layout';
 import { diaryListState } from '../data/dataState';
 import { CalendarLocales } from '../public/config/config';
 
+
 LocaleConfig.locales['kr'] = CalendarLocales;
 LocaleConfig.defaultLocale = 'kr';
 
@@ -20,32 +21,14 @@ const HomeScreen = () => {
     useNavigation<NativeStackNavigationProp<ROOT_NAVIGATION>>();
   const diaryList = useRecoilValue(diaryListState);
 
-  const totalDate = diaryList.map(item => item.date.totalDate);
-  const resultDate = totalDate.map(item => {
-    const date = new Date(item);
-    date.setHours(8, 0, 0, 0);
-    return date;
-  });
-
-  const test = resultDate.map(date => date.setDate(date.getDate() + 1))
-
   useEffect(() => {
     console.log(
       Platform.OS === 'android'
-        ? `'🚀 : diaryList[Android] ==> `
-        : `'🚀 : diaryList[IOS] ==> `,
+        ? '🚀 : diaryList[Android] ==> '
+        : '🚀 : diaryList[IOS] ==> ',
       diaryList,
     );
   }, [diaryList]);
-
-  useEffect(() => {
-    console.log(
-      Platform.OS === 'android'
-        ? `'🚀 : test[Android] ==> `
-        : `'🚀 : test[IOS] ==> `,
-        test,
-    );
-  }, [test]);
 
   // View
   return (

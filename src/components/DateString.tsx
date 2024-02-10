@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Text, View } from 'react-native';
 
-interface DateProps {
+interface DateStringProps {
   date: string;
 }
 
-const Date: FC<DateProps> = ({date}) => {
+const DateString: FC<DateStringProps> = ({date}) => {
   return (
     <View>
       <Text>{date}</Text>
@@ -13,4 +13,4 @@ const Date: FC<DateProps> = ({date}) => {
   );
 };
 
-export default Date;
+export default DateString;

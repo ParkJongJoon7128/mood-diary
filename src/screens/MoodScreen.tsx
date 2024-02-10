@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import Date from '../components/Date';
+import DateString from '../components/DateString';
 import DiaryInput from '../components/DiaryInput';
 import Emotion from '../components/Emotion';
 import Title from '../components/Title';
@@ -20,9 +20,8 @@ const MoodScreen = () => {
   const [diary, setDiary] = useRecoilState(diaryState);
   const [diaryValue, setDiaryValue] = useState('');
   const [isReset, setIsReset] = useState(false);
-
-  const {date, mood} = diary;
   const setDiaryList = useSetRecoilState(diaryListState);
+  const {date, mood} = diary;
 
   const handleSubmit = (event: OnPressHandleSubmitEvent) => {
     event.preventDefault();
@@ -35,7 +34,7 @@ const MoodScreen = () => {
 
     // diaryList 업데이트
     setDiaryList(prev => [...prev, resultDiary]);
-    onCreateTriggerNotification();
+    onCreateTriggerNotification(resultDiary);
     navigation.navigate('Home');
   };
 
@@ -50,7 +49,7 @@ const MoodScreen = () => {
       <View className="flex-1 p-4">
         <View className="border border-mood-gray-700 rounded-xl p-5">
           <View>
-            <Date date={date.totalText} />
+            <DateString date={date.totalText} />
           </View>
 
           <View className="items-center justify-center">

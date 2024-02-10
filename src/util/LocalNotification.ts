@@ -1,15 +1,14 @@
 import notifee, {
-  AndroidImportance,
-  AndroidNotificationSetting,
-  AndroidVisibility,
-  AuthorizationStatus,
-  TimestampTrigger,
-  TriggerType,
+    AndroidImportance,
+    AndroidNotificationSetting,
+    AndroidVisibility,
+    AuthorizationStatus,
+    TimestampTrigger,
+    TriggerType,
 } from '@notifee/react-native';
-import { useRecoilValue } from 'recoil';
-import { diaryListState } from '../data/dataState';
+import { notiAlarmComment } from '../data/common';
+import { DateType, MoodType } from '../lib/type';
 
-// Permission Setting
 export const requestUserPermission = async () => {
   const settings = await notifee.requestPermission();
 
@@ -32,19 +31,18 @@ export const requestAndroidPermissionSettings = async () => {
 };
 
 // Create a Trigger Notification
-export const onCreateTriggerNotification = async () => {
-  const diaryList = useRecoilValue(diaryListState);
-
-  const moodID = diaryList.map(item => item.mood.id);
-  const totalDate = diaryList.map(item => item.date.totalDate);
-  const resultDate = totalDate.map(item => {
-    const date = new Date(item);
-    date.setHours(8, 0, 0, 0);
-    return date;
-  });
+export const onCreateTriggerNotification = async (resultDiary: {
+  diary: string;
+  id: number;
+  mood: MoodType;
+  date: DateType;
+}) => {
+  const totalDate = resultDiary.date.totalDate;
+  const date = new Date(totalDate);
+  date.setHours(8, 0, 0, 0);
 
   // Create a channel (required for Android)
-  const channelID = await notifee.createChannel({
+  const channelId = await notifee.createChannel({
     id: 'cheerup_message',
     name: '응원 메세지 알림',
     importance: AndroidImportance.HIGH,
@@ -54,28 +52,28 @@ export const onCreateTriggerNotification = async () => {
   });
 
   // Create a trigger
-  const trigger: TimestampTrigger[] = resultDate.map(date => {
-    return {
-      type: TriggerType.TIMESTAMP,
-      timestamp: date.setDate(date.getDate() + 1),
-      alarmManager: true,
-    };
-  });
+  const trigger: TimestampTrigger = {
+    type: TriggerType.TIMESTAMP,
+    timestamp: date.setDate(date.getDate() + 1),
+    alarmManager: {
+      allowWhileIdle: true,
+    },
+  };
 
   // Required for iOS
   // See https://notifee.app/react-native/docs/ios/permissions
   await notifee.requestPermission();
 
   // Display a notification
-  trigger.map(async trigger => {
-    await notifee.createTriggerNotification(
+  await notifee
+    .createTriggerNotification(
       {
         title: '오늘의 알림',
-        body: 'test',
+        body: showNotiMessage(resultDiary.mood.id),
         android: {
-          channelId: channelID,
+          channelId,
           pressAction: {
-            id: 'default',
+            id: channelId,
           },
           importance: AndroidImportance.HIGH,
           visibility: AndroidVisibility.PUBLIC,
@@ -94,47 +92,39 @@ export const onCreateTriggerNotification = async () => {
         },
       },
       trigger,
-    );
-  });
+    )
+    .then(() => {
+      notifee
+        .getTriggerNotificationIds()
+        .then(ids => console.log('All trigger notifications: ', ids));
+    });
 };
 
-// // Show a Notification
-// export const onDisplayNotification = async () => {
-//   // Request permissions (required for iOS)
-//   await notifee.requestPermission();
-
-//   // Create a channel (required for Android)
-//   const channelID = await notifee.createChannel({
-//     id: 'cheerup_message',
-//     name: '응원 메세지 알림',
-//     importance: AndroidImportance.HIGH,
-//     visibility: AndroidVisibility.PUBLIC,
-//     vibration: true,
-//     vibrationPattern: [300, 800],
-//   });
-
-//   // Display a notification
-//   await notifee.displayNotification({
-//     title: '오늘의 알림',
-//     body: 'test',
-//     android: {
-//       channelId: channelID,
-//       pressAction: {
-//         id: 'default',
-//       },
-//       importance: AndroidImportance.HIGH,
-//       visibility: AndroidVisibility.PUBLIC,
-//       vibrationPattern: [300, 800],
-//       groupSummary: true,
-//       groupId: 'cheerup_group',
-//     },
-//     ios: {
-//       foregroundPresentationOptions: {
-//         badge: true,
-//         sound: true,
-//         banner: true,
-//         list: true,
-//       },
-//     },
-//   });
-// };
+export const showNotiMessage = (id: number) => {
+  switch (id) {
+    case 1:
+      return notiAlarmComment[id];
+      break;
+    case 2:
+      return notiAlarmComment[id];
+      break;
+    case 3:
+      return notiAlarmComment[id];
+      break;
+    case 4:
+      return notiAlarmComment[id];
+      break;
+    case 5:
+      return notiAlarmComment[id];
+      break;
+    case 6:
+      return notiAlarmComment[id];
+      break;
+    case 7:
+      return notiAlarmComment[id];
+      break;
+    case 8:
+      return notiAlarmComment[id];
+      break;
+  }
+};
