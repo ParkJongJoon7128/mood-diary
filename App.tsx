@@ -1,6 +1,4 @@
-import notifee, {
-  EventType
-} from '@notifee/react-native';
+import notifee, { EventType } from '@notifee/react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {
   CardStyleInterpolators,
@@ -14,7 +12,10 @@ import HomeScreen from './src/screens/HomeScreen';
 import ItemScreen from './src/screens/ItemScreen';
 import MoodScreen from './src/screens/MoodScreen';
 import TodayIsScreen from './src/screens/TodayIsScreen';
-import { requestAndroidPermissionSettings, requestUserPermission } from './src/util/LocalNotification';
+import {
+  requestAndroidPermissionSettings,
+  requestUserPermission,
+} from './src/util/LocalNotification';
 
 const Stack = createStackNavigator<ROOT_NAVIGATION>();
 
@@ -34,9 +35,21 @@ function App(): JSX.Element {
       switch (type) {
         case EventType.DISMISSED:
           // Remove the notification
+          notifee
+            .decrementBadgeCount()
+            .then(() => notifee.getBadgeCount())
+            .then(count =>
+              console.log('Badge count decremented by 1 to: ', count),
+            );
           console.log('User dismissed notification', detail.notification);
           break;
         case EventType.PRESS:
+          notifee
+            .decrementBadgeCount()
+            .then(() => notifee.getBadgeCount())
+            .then(count =>
+              console.log('Badge count decremented by 1 to: ', count),
+            );
           console.log('User pressed notification', detail.notification);
           break;
       }

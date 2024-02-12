@@ -491,7 +491,7 @@
 				DEVELOPMENT_TEAM = A2M4GTV77C;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TestApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Feely;
+				INFOPLIST_KEY_CFBundleDisplayName = TestApp;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -521,7 +521,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = A2M4GTV77C;
 				INFOPLIST_FILE = TestApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Feely;
+				INFOPLIST_KEY_CFBundleDisplayName = TestApp;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

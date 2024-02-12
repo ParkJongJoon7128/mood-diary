@@ -1,10 +1,11 @@
 import notifee, {
-    AndroidImportance,
-    AndroidNotificationSetting,
-    AndroidVisibility,
-    AuthorizationStatus,
-    TimestampTrigger,
-    TriggerType,
+  AndroidBadgeIconType,
+  AndroidImportance,
+  AndroidNotificationSetting,
+  AndroidVisibility,
+  AuthorizationStatus,
+  TimestampTrigger,
+  TriggerType,
 } from '@notifee/react-native';
 import { notiAlarmComment } from '../data/common';
 import { DateType, MoodType } from '../lib/type';
@@ -48,13 +49,15 @@ export const onCreateTriggerNotification = async (resultDiary: {
     importance: AndroidImportance.HIGH,
     visibility: AndroidVisibility.PUBLIC,
     vibration: true,
-    vibrationPattern: [300, 800],
+    vibrationPattern: [300, 500],
+    badge: true,
   });
 
   // Create a trigger
   const trigger: TimestampTrigger = {
     type: TriggerType.TIMESTAMP,
-    timestamp: date.setDate(date.getDate() + 1),
+    // timestamp: date.setDate(date.getDate() + 1),
+    timestamp: date.setDate(date.getDate()),
     alarmManager: {
       allowWhileIdle: true,
     },
@@ -74,13 +77,16 @@ export const onCreateTriggerNotification = async (resultDiary: {
           channelId,
           pressAction: {
             id: channelId,
+            launchActivity: 'com.testapp.MainActivity',
           },
           importance: AndroidImportance.HIGH,
           visibility: AndroidVisibility.PUBLIC,
-          vibrationPattern: [300, 800],
+          vibrationPattern: [300, 500],
           groupSummary: true,
           groupId: 'cheerup_group',
           showTimestamp: true,
+          largeIcon: 'ic_launcher',
+          badgeIconType: AndroidBadgeIconType.SMALL,
         },
         ios: {
           foregroundPresentationOptions: {
@@ -97,6 +103,12 @@ export const onCreateTriggerNotification = async (resultDiary: {
       notifee
         .getTriggerNotificationIds()
         .then(ids => console.log('All trigger notifications: ', ids));
+    })
+    .then(() => {
+      notifee
+        .incrementBadgeCount()
+        .then(() => notifee.getBadgeCount())
+        .then(count => console.log('Badge count incremented by 1 to: ', count));
     });
 };
 
