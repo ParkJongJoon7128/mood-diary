@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 import { RecoilRoot } from 'recoil';
 import BackButton from './src/components/BackButton';
 import HomeScreen from './src/screens/HomeScreen';
@@ -20,6 +21,13 @@ import {
 const Stack = createStackNavigator<ROOT_NAVIGATION>();
 
 function App(): JSX.Element {
+
+  useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000);
+  }, []);
+
   // Permission Setting
   useEffect(() => {
     requestUserPermission();
