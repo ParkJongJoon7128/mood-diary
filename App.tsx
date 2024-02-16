@@ -21,19 +21,11 @@ import {
 const Stack = createStackNavigator<ROOT_NAVIGATION>();
 
 function App(): JSX.Element {
-
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();
     }, 1000);
-  }, []);
-
-  // Permission Setting
-  useEffect(() => {
     requestUserPermission();
-  }, []);
-
-  useEffect(() => {
     requestAndroidPermissionSettings();
   }, []);
 
@@ -49,7 +41,6 @@ function App(): JSX.Element {
             .then(count =>
               console.log('Badge count decremented by 1 to: ', count),
             );
-          console.log('User dismissed notification', detail.notification);
           break;
         case EventType.PRESS:
           notifee
@@ -58,7 +49,6 @@ function App(): JSX.Element {
             .then(count =>
               console.log('Badge count decremented by 1 to: ', count),
             );
-          console.log('User pressed notification', detail.notification);
           break;
       }
     });
@@ -81,7 +71,14 @@ function App(): JSX.Element {
             <Stack.Screen
               name="Home"
               component={HomeScreen}
-              options={{headerShown: false}}
+              options={{
+                headerStyle: {
+                  backgroundColor: 'transparent',
+                },
+                headerShown: false,
+                headerTransparent: false,
+                title: '',
+              }}
             />
             <Stack.Screen
               name="Mood"
@@ -91,7 +88,7 @@ function App(): JSX.Element {
                   backgroundColor: 'transparent',
                 },
                 headerShown: true,
-                headerTransparent: false,
+                headerTransparent: true,
                 title: '',
                 headerLeft: () => {
                   return <BackButton />;

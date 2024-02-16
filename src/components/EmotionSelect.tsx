@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { useRecoilState } from 'recoil';
 import { diaryState } from '../data/dataState';
@@ -61,7 +61,7 @@ const EmotionSelect: FC<EmotionSelectProps> = ({
   // View
   return (
     <View className="flex-1 items-center justify-center">
-      <Text className="text-3xl mb-2">{title}</Text>
+      <Text className={`${Platform.OS === 'ios' ? "text-3xl mt-12" : "text-3xl mb-2"}`}>{title}</Text>
       <View className="flex-row flex-wrap items-center justify-center">
         {moods.map(mood => (
           <TouchableOpacity
