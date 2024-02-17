@@ -6,11 +6,11 @@ import ActionButton from 'react-native-action-button';
 import { LocaleConfig } from 'react-native-calendars';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRecoilValue } from 'recoil';
+import AdMobBanner from '../components/AdMobBanner';
 import CalendarView from '../components/CalendarView';
 import Layout from '../components/layout/Layout';
 import { diaryListState } from '../data/dataState';
 import { CalendarLocales } from '../public/config/config';
-
 
 LocaleConfig.locales['kr'] = CalendarLocales;
 LocaleConfig.defaultLocale = 'kr';
@@ -42,6 +42,7 @@ const HomeScreen = () => {
           position="right"
         />
       </SafeAreaView>
+      <AdMobBanner />
     </Layout>
   );
 };

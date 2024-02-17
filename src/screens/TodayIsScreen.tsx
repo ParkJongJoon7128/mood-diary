@@ -1,6 +1,7 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRecoilState } from 'recoil';
+import AdMobBanner from '../components/AdMobBanner';
 import EmotionSelect from '../components/EmotionSelect';
 import Layout from '../components/layout/Layout';
 import { moods } from '../data/common';
@@ -26,6 +27,7 @@ const TodayIsScreen = () => {
           emotionChange={handleEmotionChange}
         />
       </SafeAreaView>
+      <AdMobBanner />
     </Layout>
   );
 };

@@ -1,4 +1,9 @@
 {
   "name": "TestApp",
-  "displayName": "TestApp"
+  "displayName": "TestApp",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-1675206643803027~4888888614",
+    "ios_app_id": "ca-app-pub-1675206643803027~5117965235",
+    "user_tracking_usage_description": "This identifier will be used to deliver personalized ads to you."
+  }
 }

@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { Image, Platform, SafeAreaView, View } from 'react-native';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import AdMobBanner from '../components/AdMobBanner';
 import DateString from '../components/DateString';
 import DiaryInput from '../components/DiaryInput';
 import Emotion from '../components/Emotion';
@@ -70,6 +71,7 @@ const MoodScreen = () => {
         </View>
         
       </SafeAreaView>
+      <AdMobBanner />
       <View className="justify-end overflow-hidden bg-black">
           <Image
             source={require('../public/images/chutzrit_banner50.png')}
