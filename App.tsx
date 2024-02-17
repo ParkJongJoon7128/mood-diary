@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
+import codePush from 'react-native-code-push';
 import SplashScreen from 'react-native-splash-screen';
 import { RecoilRoot } from 'recoil';
 import BackButton from './src/components/BackButton';
@@ -132,4 +133,10 @@ function App(): JSX.Element {
   );
 }
 
-export default App;
+const codePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
+  installMode: codePush.InstallMode.IMMEDIATE,
+}
+
+// export default App;
+export default codePush(codePushOptions)(App)

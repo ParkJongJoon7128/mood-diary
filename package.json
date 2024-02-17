@@ -23,6 +23,7 @@
     "react-native": "0.73.2",
     "react-native-action-button": "^2.8.5",
     "react-native-calendars": "^1.1303.0",
+    "react-native-code-push": "^8.2.1",
     "react-native-gesture-handler": "^2.14.1",
     "react-native-google-mobile-ads": "^12.10.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",

@@ -11,6 +11,7 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.flipper.ReactNativeFlipper
 import com.facebook.soloader.SoLoader
+import com.microsoft.codepush.react.CodePush;
 
 class MainApplication : Application(), ReactApplication {
 
@@ -32,6 +33,10 @@ class MainApplication : Application(), ReactApplication {
 
   override val reactHost: ReactHost
     get() = getDefaultReactHost(this.applicationContext, reactNativeHost)
+
+  override fun getJSBundleFile(): String {
+            return CodePush.getJSBundleFile()
+  }
 
   override fun onCreate() {
     super.onCreate()

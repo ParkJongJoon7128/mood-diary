@@ -94,6 +94,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            resValue "string", "CodePushDepoymentKey", '"'
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -101,6 +102,11 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            resValue "string", "CodePushDepoymentKey", '"_6nFKzkPFQVFRij4zpwfO3kpNvCaNfir5QiVp"'
+        }
+        releaseStaging {
+            resValue "string", "CodePushDeploymentKey", '"kwMz5sXtS_l-YOA9VhLVkzvd4oe4x76SBAQlC"'
+            matchingFallbacks = ['release']
         }
     }
 }
@@ -120,3 +126,4 @@ dependencies {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
