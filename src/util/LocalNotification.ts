@@ -54,8 +54,8 @@ export const onCreateTriggerNotification = async (resultDiary: {
   // Create a trigger
   const trigger: TimestampTrigger = {
     type: TriggerType.TIMESTAMP,
-    // timestamp: date.setDate(date.getDate() + 1),
-    timestamp: date.setDate(date.getDate()),
+    timestamp: date.setDate(date.getDate() + 1),
+    // timestamp: date.setDate(date.getDate()),
     alarmManager: {
       allowWhileIdle: true,
     },

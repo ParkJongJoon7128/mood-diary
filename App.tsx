@@ -14,10 +14,6 @@ import HomeScreen from './src/screens/HomeScreen';
 import ItemScreen from './src/screens/ItemScreen';
 import MoodScreen from './src/screens/MoodScreen';
 import TodayIsScreen from './src/screens/TodayIsScreen';
-import {
-  requestAndroidPermissionSettings,
-  requestUserPermission,
-} from './src/util/LocalNotification';
 
 const Stack = createStackNavigator<ROOT_NAVIGATION>();
 
@@ -26,8 +22,8 @@ function App(): JSX.Element {
     setTimeout(() => {
       SplashScreen.hide();
     }, 1000);
-    requestUserPermission();
-    requestAndroidPermissionSettings();
+    // requestUserPermission();
+    // requestAndroidPermissionSettings();
   }, []);
 
   // Subscribe to events
