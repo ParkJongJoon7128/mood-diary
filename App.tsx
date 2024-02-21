@@ -21,7 +21,7 @@ function App(): JSX.Element {
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();
-    }, 1000);
+    }, 2000);
     // requestUserPermission();
     // requestAndroidPermissionSettings();
   }, []);
