@@ -5,8 +5,9 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { AppState, Platform, Text, View } from 'react-native';
 import codePush from 'react-native-code-push';
+import { PERMISSIONS, request } from 'react-native-permissions';
 import SplashScreen from 'react-native-splash-screen';
 import { RecoilRoot } from 'recoil';
 import BackButton from './src/components/BackButton';
@@ -22,6 +23,15 @@ function App(): JSX.Element {
     setTimeout(() => {
       SplashScreen.hide();
     }, 2000);
+    const listener = AppState.addEventListener('change', (status) => {
+      if (Platform.OS === 'ios' && status === 'active'){
+        request(PERMISSIONS.IOS.APP_TRACKING_TRANSPARENCY)
+        .then((result) => console.log(result))
+        .catch((error) => console.log(error));
+      }
+    });
+
+    return () => {listener.remove()}
     // requestUserPermission();
     // requestAndroidPermissionSettings();
   }, []);
