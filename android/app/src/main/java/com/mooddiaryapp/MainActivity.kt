@@ -1,4 +1,4 @@
-package com.mooddiaryapp
+package com.MoodDiaryApp
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
