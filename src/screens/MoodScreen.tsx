@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { Image, Platform, SafeAreaView, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import AdMobBanner from '../components/AdMobBanner';
 import DateString from '../components/DateString';
@@ -46,40 +47,44 @@ const MoodScreen = () => {
   // View
   return (
     <Layout>
-      <SafeAreaView className="flex-1">
-        <View className="flex-1 ml-4 mr-4 mt-16">
-          <View className="border border-mood-gray-700 rounded-xl p-5">
-            <View>
-              <DateString date={date.totalText} />
-            </View>
-
-            <View className="items-center justify-center">
-              <View className="p-5">
-                <Emotion data={mood} size="large" />
-                <View className="p-5">
-                  <Title mainTitle={mood.description} />
-                </View>
+      <KeyboardAwareScrollView
+        className="flex-1"
+        resetScrollToCoords={{x: 0, y: 0}}
+        scrollEnabled={true}>
+        <SafeAreaView className="flex-1">
+          <View className="flex-1 ml-4 mr-4 mt-16">
+            <View className="border border-mood-gray-700 rounded-xl p-5">
+              <View>
+                <DateString date={date.totalText} />
               </View>
-              <DiaryInput
-                isReset={isReset}
-                onChange={handleChange}
-                handleSubmit={handleSubmit}
-              />
+
+              <View className="items-center justify-center">
+                <View className="p-5">
+                  <Emotion data={mood} size="large" />
+                  <View className="p-5">
+                    <Title mainTitle={mood.description} />
+                  </View>
+                </View>
+                <DiaryInput
+                  isReset={isReset}
+                  onChange={handleChange}
+                  handleSubmit={handleSubmit}
+                />
+              </View>
             </View>
           </View>
-        </View>
-        
-      </SafeAreaView>
+        </SafeAreaView>
+      </KeyboardAwareScrollView>
       <AdMobBanner />
       <View className="justify-end overflow-hidden bg-black">
-          <Image
-            source={require('../public/images/chutzrit_banner50.png')}
-            resizeMode="contain"
-            className={`${
-              Platform.OS === 'ios' ? 'w-full h-16 mb-8' : 'w-full h-16'
-            }`}
-          />
-        </View>
+        <Image
+          source={require('../public/images/chutzrit_banner50.png')}
+          resizeMode="contain"
+          className={`${
+            Platform.OS === 'ios' ? 'w-full h-16 mb-8' : 'w-full h-16'
+          }`}
+        />
+      </View>
     </Layout>
   );
 };
