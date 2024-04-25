@@ -4,6 +4,9 @@
 
 ![unnamed](https://github.com/ParkJongJoon7128/mood-diary/assets/51289286/4f29602a-94b0-44c9-bce2-3d60042b9390)
 
+# Download
+다운로드 링크: [링크](https://apps.apple.com/kr/app/%ED%95%84%EB%A6%AC/id6478108331)
+
 # 🛠️ 사용기술
 - React Native CLI
 - Recoil
